@@ -20,13 +20,13 @@ def showLenguage() -> ReplyKeyboardMarkup:
 
 def showMainMenu(button) -> ReplyKeyboardMarkup:
     return ReplyKeyboardMarkup(
-                [
-                    [button],
-                    ['📦Buyurtmalarim', '⚙️Sozlamalar'],
-                    ['ℹ️Biz haqimizda', '✍️ Fikr qoldirish']
-                ],
-                resize_keyboard=True,
-            )
+        [
+            [button],
+            ['📦Buyurtmalarim', '⚙️Sozlamalar'],
+            ['ℹ️Biz haqimizda', '✍️ Fikr qoldirish']
+        ],
+        resize_keyboard=True,
+    )
 
 
 def start(update: Update, context: CallbackContext):
