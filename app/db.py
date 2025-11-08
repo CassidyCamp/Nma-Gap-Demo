@@ -1,6 +1,8 @@
 import json
-
-from app.config import File_Name, DP_File_Name
+try:
+    from app.config import File_Name, DP_File_Name
+except ImportError:
+    from app.config import File_Name, DP_File_Name
 
 
 def save_database(data: dict):

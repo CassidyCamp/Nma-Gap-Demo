@@ -19,7 +19,11 @@ from app.handlers import (
     feedback,
     feedbackEnding
 )
-from app.config import Token
+
+try:
+    from app.config import Token
+except ImportError:
+    from app.config_simple import Token
 
 updater = Updater(Token)
 dispatcher = updater.dispatcher
@@ -41,7 +45,7 @@ dispatcher.add_handler(MessageHandler(Filters.text("📞 Telefon raqamingizni o'
 dispatcher.add_handler(MessageHandler(Filters.text("ℹ️Biz haqimizda"), about))
 dispatcher.add_handler(MessageHandler(Filters.text("✍️ Fikr qoldirish"), feedback))
 dispatcher.add_handler(MessageHandler(Filters.text("⬅️ Orqaga"), back))
-dispatcher.add_handler(MessageHandler(Filters.text &~Filters.command, feedbackEnding))
+dispatcher.add_handler(MessageHandler(Filters.text &~ Filters.command, feedbackEnding))
 
 updater.start_polling()
 updater.idle()

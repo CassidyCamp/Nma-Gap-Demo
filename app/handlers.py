@@ -2,7 +2,11 @@ from telegram import Update, ReplyKeyboardMarkup, KeyboardButton, WebAppInfo
 from telegram.ext import CallbackContext
 
 from app.db import add_user, checkPhoneNumber, add_contact
-from app.config import WEB_APP_URL, wep_app_btn
+try:
+    from app.config import WEB_APP_URL, wep_app_btn
+except ImportError:
+    from app.config_simple import WEB_APP_URL, wep_app_btn
+
 
 feedback_mode = {}
 
@@ -133,10 +137,13 @@ def editPhone(update: Update, context: CallbackContext):
 
 
 def back(update: Update, context: CallbackContext):
-    update.message.reply_text(
-        text='🏠 Asosiy Menu',
-        reply_markup=showMainMenu(wep_app_btn)
-    )
+    if not checkPhoneNumber(update.message.from_user.id):
+        update.message.reply_text(
+            text='🏠 Asosiy Menu',
+            reply_markup=showMainMenu(wep_app_btn)
+        )
+    else:
+        getPhoneNumber(update, context)
 
 
 def about(update: Update, context: CallbackContext):
@@ -179,6 +186,9 @@ def feedbackEnding(update: Update, context: CallbackContext):
                 back(update, context)
         else:
             sendMessage(update, context)
+            back(update, context)
+    else:
+        sendMessage(update, context)
     feedback_mode[update.message.from_user.id] = False
 
 
