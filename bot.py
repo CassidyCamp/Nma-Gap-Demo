@@ -42,7 +42,6 @@ dispatcher.add_handler(MessageHandler(Filters.text("ℹ️Biz haqimizda"), about
 dispatcher.add_handler(MessageHandler(Filters.text("✍️ Fikr qoldirish"), feedback))
 dispatcher.add_handler(MessageHandler(Filters.text("⬅️ Orqaga"), back))
 dispatcher.add_handler(MessageHandler(Filters.text &~Filters.command, feedbackEnding))
-# dispatcher.add_handler(MessageHandler(Filters.text, sendMessage))
 
 updater.start_polling()
 updater.idle()
